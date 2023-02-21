@@ -70,6 +70,15 @@
         <controls-library-filter-select v-if="isSeriesPage && !isBatchSelecting" v-model="settings.seriesFilterBy" is-series class="w-36 sm:w-44 md:w-48 h-7.5 ml-1 sm:ml-4" @change="updateSeriesFilter" />
         <controls-sort-select v-if="isSeriesPage && !isBatchSelecting" v-model="settings.seriesSortBy" :descending.sync="settings.seriesSortDesc" :items="seriesSortItems" class="w-36 sm:w-44 md:w-48 h-7.5 ml-1 sm:ml-4" @change="updateSeriesSort" />
 
+        <div class="h-7 ml-4 flex border border-white border-opacity-25 rounded-md">
+          <div class="h-full px-2 text-white flex items-center rounded-l-md hover:bg-primary hover:bg-opacity-75 cursor-pointer" :class="isGridMode ? 'bg-primary' : 'text-opacity-70'" @click="$emit('update:viewMode', 'grid')">
+            <span class="material-icons" style="font-size: 1.4rem">view_module</span>
+          </div>
+          <div class="h-full px-2 text-white flex items-center rounded-r-md hover:bg-primary hover:bg-opacity-75 cursor-pointer" :class="!isGridMode ? 'bg-primary' : 'text-opacity-70'" @click="$emit('update:viewMode', 'list')">
+            <span class="material-icons" style="font-size: 1.4rem">view_list</span>
+          </div>
+        </div>
+
         <ui-btn v-if="isIssuesFilter && userCanDelete && !isBatchSelecting" :loading="processingIssues" color="error" small class="ml-4" @click="removeAllIssues">{{ $strings.ButtonRemoveAll }} {{ numShowing }} {{ entityName }}</ui-btn>
       </template>
       <!-- search page -->
@@ -97,6 +106,7 @@ export default {
       default: () => null
     },
     searchQuery: String,
+    viewMode: String,
     authors: {
       type: Array,
       default: () => []
@@ -158,6 +168,9 @@ export default {
           value: 'totalDuration'
         }
       ]
+    },
+    isGridMode() {
+      return this.viewMode === 'grid'
     },
     userIsAdminOrUp() {
       return this.$store.getters['user/getIsAdminOrUp']
