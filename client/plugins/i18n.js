@@ -12,6 +12,7 @@ const languageCodeMap = {
   'hr': { label: 'Hrvatski', dateFnsLocale: 'hr' },
   'it': { label: 'Italiano', dateFnsLocale: 'it' },
   'pl': { label: 'Polski', dateFnsLocale: 'pl' },
+  'pt-br': { label: 'Português (Brasil)', dateFnsLocale: 'ptBR' },
   'ru': { label: 'Русский', dateFnsLocale: 'ru' },
   'zh-cn': { label: '简体中文 (Simplified Chinese)', dateFnsLocale: 'zhCN' },
 }
