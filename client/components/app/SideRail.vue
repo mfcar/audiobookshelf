@@ -97,6 +97,14 @@
       </div>
     </nuxt-link>
 
+    <nuxt-link :to="`/library/${currentLibraryId}/calendar`" class="w-full h-20 flex flex-col items-center justify-center text-white text-opacity-80 border-b border-primary border-opacity-70 hover:bg-primary cursor-pointer relative" :class="isCalendarQueuePage ? 'bg-primary bg-opacity-80' : 'bg-bg bg-opacity-60'">
+      <span class="material-icons text-2xl">date_range</span>
+
+      <p class="pt-1.5 text-center leading-4" style="font-size: 0.9rem">Calendar</p>
+
+      <div v-show="isCalendarQueuePage" class="h-full w-0.5 bg-yellow-400 absolute top-0 left-0" />
+    </nuxt-link>
+
     <div class="w-full h-12 px-1 py-2 border-t border-black border-opacity-20 absolute left-0" :style="{ bottom: streamLibraryItem ? '240px' : '65px' }">
       <p class="underline font-mono text-xs text-center text-gray-300 leading-3 mb-1" @click="clickChangelog">v{{ $config.version }}</p>
       <a v-if="hasUpdate" :href="githubTagUrl" target="_blank" class="text-warning text-xxs text-center block leading-3">Update</a>
@@ -157,6 +165,9 @@ export default {
     },
     isMusicAlbumsPage() {
       return this.paramId === 'albums'
+    },
+    isCalendarQueuePage() {
+      return this.$route.name === 'library-library-calendar'
     },
     homePage() {
       return this.$route.name === 'library-library'
