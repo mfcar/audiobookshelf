@@ -11,6 +11,7 @@
 
 import FullCalendar from '@fullcalendar/vue'
 import dayGridPlugin from '@fullcalendar/daygrid'
+import listPlugin from '@fullcalendar/list'
 import interactionPlugin from '@fullcalendar/interaction'
 
 export default {
@@ -27,7 +28,7 @@ export default {
   data() {
     return {
       calendarOptions: {
-        plugins: [ dayGridPlugin, interactionPlugin ],
+        plugins: [ dayGridPlugin, interactionPlugin, listPlugin ],
         headerToolbar: {
           left: 'prev,next today',
           center: 'title',
