@@ -29,6 +29,13 @@ import CloseButton from '@/components/widgets/CloseButton'
 
 export default {
   middleware: 'authenticated',
+  head() {
+    return {
+      htmlAttrs: {
+        lang: this.$store.state.serverSettings.language
+      }
+    }
+  },
   data() {
     return {
       socket: null,
