@@ -78,6 +78,10 @@
             <p class="text-xs ml-1 text-white text-opacity-60">{{ $strings.LabelExample }}: {{ timeExample }}</p>
           </div>
 
+          <div class="flex-grow py-2">
+            <ui-dropdown :label="$strings.LabelSettingsFirstDayOfWeek" v-model="newServerSettings.firstDayOfWeek" :items="weekdays" small class="max-w-52" @input="(val) => updateSettingsKey('firstDayOfWeek', val)" />
+          </div>
+
           <div class="py-2">
             <ui-dropdown :label="$strings.LabelLanguageDefaultServer" ref="langDropdown" v-model="newServerSettings.language" :items="$languageCodeOptions" small class="max-w-52" @input="updateServerLanguage" />
           </div>
@@ -310,6 +314,18 @@ export default {
     timeExample() {
       const date = new Date(2014, 2, 25, 17, 30, 0)
       return this.$formatJsTime(date, this.newServerSettings.timeFormat)
+    },
+    weekdays() {
+      return [
+        {
+          text: this.$formatJsDate(new Date(2023, 0, 1), 'EEEE'),
+          value: 0
+        },
+        {
+          text: this.$formatJsDate(new Date(2023, 0, 2), 'EEEE'),
+          value: 1
+        }
+      ]
     }
   },
   methods: {

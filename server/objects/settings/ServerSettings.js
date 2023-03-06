@@ -52,6 +52,7 @@ class ServerSettings {
     this.enableEReader = false
     this.dateFormat = 'MM/dd/yyyy'
     this.timeFormat = 'HH:mm'
+    this.firstDayOfWeek = 0
     this.language = 'en-us'
 
     this.logLevel = Logger.logLevel
@@ -98,6 +99,7 @@ class ServerSettings {
     this.enableEReader = !!settings.enableEReader
     this.dateFormat = settings.dateFormat || 'MM/dd/yyyy'
     this.timeFormat = settings.timeFormat || 'HH:mm'
+    this.firstDayOfWeek = settings.firstDayOfWeek || 0
     this.language = settings.language || 'en-us'
     this.logLevel = settings.logLevel || Logger.logLevel
     this.version = settings.version || null
@@ -149,6 +151,7 @@ class ServerSettings {
       enableEReader: this.enableEReader,
       dateFormat: this.dateFormat,
       timeFormat: this.timeFormat,
+      firstDayOfWeek: this.firstDayOfWeek,
       language: this.language,
       logLevel: this.logLevel,
       version: this.version
