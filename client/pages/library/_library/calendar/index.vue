@@ -53,11 +53,7 @@ export default {
         },
         firstDay: this.firstDayOfWeek,
         initialView: 'dayGridMonth',
-        datesSet: this.handleDatesSet,
-        events: [
-          {title: 'event 1', date: '2023-02-01'},
-          {title: 'event 2', date: '2023-02-02'}
-        ]
+        datesSet: this.handleDatesSet
       }
     }
   },

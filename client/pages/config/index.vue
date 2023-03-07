@@ -68,6 +68,9 @@
             </ui-tooltip>
           </div>
 
+          <div class="pt-4">
+            <h2 class="font-semibold">{{ $strings.HeaderSettingsRegional }}</h2>
+          </div>
           <div class="flex-grow py-2">
             <ui-dropdown :label="$strings.LabelSettingsDateFormat" v-model="newServerSettings.dateFormat" :items="dateFormats" small class="max-w-52" @input="(val) => updateSettingsKey('dateFormat', val)" />
             <p class="text-xs ml-1 text-white text-opacity-60">{{ $strings.LabelExample }}: {{ dateExample }}</p>
