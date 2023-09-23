@@ -48,6 +48,13 @@ class PodcastManager {
     }
   }
 
+  clearLibraryDownloadQueue(libraryId) {
+    Logger.info(`[PodcastManager] Clearing downloads in queue for library "${libraryId}"`)
+    if (!this.downloadQueue.length) return
+
+    this.downloadQueue = this.downloadQueue.filter(d => d.libraryId !== libraryId)
+  }
+
   async downloadPodcastEpisodes(libraryItem, episodesToDownload, isAutoDownload) {
     let index = Math.max(...libraryItem.media.episodes.filter(ep => ep.index == null || isNaN(ep.index)).map(ep => Number(ep.index))) + 1
     for (const ep of episodesToDownload) {

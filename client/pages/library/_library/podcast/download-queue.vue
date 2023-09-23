@@ -4,7 +4,11 @@
 
     <div id="bookshelf" class="w-full overflow-y-auto px-2 py-6 sm:px-4 md:p-12 relative">
       <div class="w-full max-w-5xl mx-auto py-4">
-        <p class="text-xl mb-2 font-semibold px-4 md:px-0">{{ $strings.HeaderCurrentDownloads }}</p>
+        <div class="flex py-4">
+          <p class="text-xl mb-2 font-semibold px-4 md:px-0">{{ $strings.HeaderCurrentDownloads }}</p>
+          <div class="flex-grow" />
+          <ui-btn :disabled="!downloadQueueContainsItems" @click="clickClearLibraryDownloadQueue">{{ $strings.ButtonClearDownloadQueue }}</ui-btn>
+        </div>
         <p v-if="!episodesDownloading.length" class="text-lg py-4">{{ $strings.MessageNoDownloadsInProgress }}</p>
         <template v-for="episode in episodesDownloading">
           <div :key="episode.id" class="flex py-5 relative">
@@ -76,6 +80,9 @@ export default {
     },
     streamLibraryItem() {
       return this.$store.state.streamLibraryItem
+    },
+    downloadQueueContainsItems() {
+      return this.episodeDownloadsQueued.length > 0
     }
   },
   methods: {
@@ -98,6 +105,21 @@ export default {
     },
     episodeDownloadQueueUpdated(downloadQueueDetails) {
       this.episodeDownloadsQueued = downloadQueueDetails.queue.filter((q) => q.libraryId == this.libraryId)
+    },
+    clickClearLibraryDownloadQueue() {
+      if (confirm('Are you sure you want to clear episode download queue?')) {
+        this.$axios
+            .$get(`/api/libraries/${this.libraryId}/clear-queue`)
+            .then(() => {
+              this.$toast.success('Episode download queue cleared')
+              this.episodeDownloadsQueued = []
+              this.processing = false
+            })
+            .catch((error) => {
+              console.error('Failed to clear queue', error)
+              this.$toast.error('Failed to clear queue')
+            })
+      }
     },
     async loadInitialDownloadQueue() {
       this.processing = true

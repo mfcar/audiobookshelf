@@ -111,6 +111,22 @@ class LibraryController {
     res.json(libraryDownloadQueueDetails)
   }
 
+  /**
+   * POST: /api/libraries/:id/clear-queue
+   * Clear podcast episode download queue
+   * @param req
+   * @param res
+   * @returns {*}
+   */
+  clearLibraryDownloadQueue(req, res) {
+    if (!req.user.isAdminOrUp) {
+      Logger.error(`[PodcastController] Non-admin user attempting to clear download queue "${req.user.username}"`)
+      return res.sendStatus(403)
+    }
+    this.podcastManager.clearLibraryDownloadQueue(req.params.id)
+    res.sendStatus(200)
+  }
+
   async update(req, res) {
     const library = req.library
 

@@ -14,6 +14,7 @@
             <th class="text-left w-32 min-w-32">{{ $strings.LabelEpisode }}</th>
             <th class="text-left px-4">{{ $strings.LabelEpisodeTitle }}</th>
             <th class="text-left px-4 w-48">{{ $strings.LabelPubDate }}</th>
+            <th class="w-16 min-w-16"></th>
           </tr>
           <template v-for="downloadQueued in queue">
             <tr :key="downloadQueued.id">
@@ -36,6 +37,13 @@
               <td class="text-xs">
                 <div class="flex items-center">
                   <p>{{ $dateDistanceFromNow(downloadQueued.publishedAt) }}</p>
+                </div>
+              </td>
+              <td>
+                <div class="flex items-center">
+                  <div v-if="queue.indexOf(downloadQueued) > 0" class="h-8 w-8 flex items-center justify-center text-white text-opacity-50 hover:text-opacity-100 cursor-pointer">
+                    <button type="button" aria-label="Move to top" class="material-icons text-base">vertical_align_top</button>
+                  </div>
                 </div>
               </td>
             </tr>
