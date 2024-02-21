@@ -193,9 +193,20 @@ export default {
     },
     clickClear() {
       this.clearResults()
+    },
+    handleKeyDown(event) {
+      if ((event.metaKey || event.ctrlKey) && event.key === 'k') {
+        event.preventDefault();
+        this.$refs.input.focus();
+      }
     }
   },
-  mounted() {}
+  mounted() {
+    window.addEventListener('keydown', this.handleKeyDown);
+  },
+  beforeDestroy() {
+    window.removeEventListener('keydown', this.handleKeyDown);
+  },
 }
 </script>
 
